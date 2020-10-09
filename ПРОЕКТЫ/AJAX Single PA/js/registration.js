@@ -24,6 +24,7 @@ var productBlock = $("#newProduct");
 var menuBlock = $("#mainMenu");
 var productTemplateBlock = $("#productTemplate");
 var oneProduct = $("#product");
+var editProductBlock = $("#editProduct");
 
 var token;
 
@@ -317,7 +318,7 @@ $("body").on("click", ".mainpage", function(){
 
 $("body").on("click", ".productBlock .change", function(event){
 	getProductData(event.target, function(product){
-	    constructor(product, oneProduct, $("#modal"));
+	    constructor(product, editProductBlock, $("#modal"));
 	    $.fancybox.open({
         	src:"#modal",
       	})			

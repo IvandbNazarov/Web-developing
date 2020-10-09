@@ -72,6 +72,26 @@
 
 </script>
 
+<script id="editProduct" type="text/x-handlebars-template">
+
+	<div id="createProduct">
+		<form action="POST"></form>
+			<h2>ИЗМЕНЕНИЕ ПРОДУКТА</h2>
+			<label for="productName">Название</label>
+			<input class="productName" type="text" name="productName" placeholder="Введите название" value = {{name}}>
+			<label for="price">ЦЕНА</label>
+			<input class="count" type="number" name="price" placeholder="Укажите цену" value = {{price}}>
+			<label for="image">ВЫБРАТЬ ФОТО</label>
+			<input type="file" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
+			<button class="create">СОХРАНИТЬ</button>
+		</form>
+	</div>
+
+</script>
+
+
+
+
 
 <script id="mainMenu" type="text/x-handlebars-template">
 
@@ -103,21 +123,6 @@
 </script>
 
 
-<script id="product" type="text/x-handlebars-template">
-
-      	<div class="product">
-			<img src="http://localhost:3000/{{productImage}}" alt="">
-			<span>Наименование: {{name}}</span>
-			<span>Price: {{price}}</span>
-			<a href="#" data-id="{{_id}}" class="change btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
-			<a href="#" data-id="{{_id}}" class="delete">Удалить</a>
-			<div class="formGroup">
-				<a href="#" data-id="{{_id}}" class="orderProduct">Заказать</a>
-				№ <input type="number" class="quanityInput">
-			</div>
-		</div>
-
-</script>
 
 
 	<script src="./js/jquery.js"></script>
