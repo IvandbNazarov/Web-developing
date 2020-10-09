@@ -37,20 +37,10 @@ function constructor(obj, template, place) {
 	$(place).html(template(context));
 }
 
-
-
-
-
-
-
-
-
-
-
 							/*КНОПКИ ВХОДА*/
 
-constructor(autorizationMenu, registrationBlock, navBlock);
-constructor(registrationBlock, formBlock, mainBlock);
+constructor(autorizationMenuData, registrationBlock, navBlock);
+constructor(registrationBlockData, formBlock, mainBlock);
 
 $(".olduser").hide();
 $(".newuser").hide();
@@ -96,7 +86,7 @@ function registration() {
 
 
 
-function logIn() {
+function logIn(callback) {
 	$.ajax({
 		method:'POST',
 		url:"http://localhost:3000/user/login",
@@ -106,9 +96,10 @@ function logIn() {
 		},
 		success: function(r){
 			token = r.token;
-			alert("Вы успешно вошли!")
+			if(callback)
+				callback();
 		},
-		error: function(error){console.log(error)}
+		error: function(error){alert("WTF")}
 	})
 }
 
@@ -116,7 +107,6 @@ function logIn() {
 
 
 function addProduct(){
-	debugger;
 	var formData = new FormData();
 	    formData.append("productimage", $("#productImage").prop("files")[0]);
 	    formData.append("name", $(".productName").val());
@@ -173,7 +163,7 @@ function getProducts(){
 
 
 
-function getProduct(id){
+function getProduct(id, callback){
 	$.ajax({
 	    method:'GET',
 	    url:"http://localhost:3000/products/" + id,
@@ -181,17 +171,15 @@ function getProduct(id){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
 	    success: function(response){
-	    	constructor(response.product, oneProduct, $("#modal"));
-	    	$.fancybox.open({
-        		src:"#modal",
-      		})	
+	    	if (callback) 
+	    		callback(response.product);
 	    }
 	})
 }
 
-function getProductData(elem){
+function getProductData(elem, callback){
 	var productId = $(elem).data("id");
-	getProduct(productId);
+	getProduct(productId, callback);
 }
 
 
@@ -300,18 +288,15 @@ function deleteUser(id){
 
 $("body").on("click",'.oldbtn', function(e){
 	e.preventDefault();
-	logIn();
-	getProducts();
-	constructor(menuNav, menuBlock, navBlock);
+	logIn(function(){
+		getProducts();
+		constructor(menuNavData, menuBlock, navBlock);
+	});
 });
 
 $('body').on("click", ".newbtn", function(e){
 	e.preventDefault();
 	registration();
-	$("#main").empty();
-	$("#nav").empty();
-	getProducts();
-	constructor(menuNav, menuBlock, navBlock);
 });
 
 
@@ -319,7 +304,7 @@ $('body').on("click", ".newbtn", function(e){
 
 $("body").on("click",".add", function(){
 	$("#main").empty();
-	constructor(createProduct, productBlock, mainBlock);
+	constructor(createProductBlockData, productBlock, mainBlock);
 })
 
 
@@ -331,7 +316,12 @@ $("body").on("click", ".mainpage", function(){
 
 
 $("body").on("click", ".productBlock .change", function(event){
-	getProductData(event.target);	
+	getProductData(event.target, function(product){
+	    constructor(product, oneProduct, $("#modal"));
+	    $.fancybox.open({
+        	src:"#modal",
+      	})			
+	});	
 })
 $("body").on("click", ".productBlock .delete", function(event){
 	getProductData(event.target);	

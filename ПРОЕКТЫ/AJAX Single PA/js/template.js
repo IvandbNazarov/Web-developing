@@ -1,9 +1,9 @@
-var autorizationMenu = {
+var autorizationMenuData = {
 	nameLogin : "ВХОД",
 	nameRegistr	: "РЕГИСТРАЦИЯ"
 }
 
-var registrationBlock = {
+var registrationBlockData = {
 	olduser : {
 		email : "EMAIL",
 		password : "ПАРОЛЬ",
@@ -16,7 +16,7 @@ var registrationBlock = {
 	}
 }
 
-var createProduct = {
+var createProductBlockData = {
 	title : "СОЗДАНИЕ НОВОГО ПРОДУКТА",
 	name : "Наименование",
 	price : "Цена",
@@ -24,7 +24,7 @@ var createProduct = {
 	button : "ДОБАВИТЬ"
 }
 
-var menuNav = {
+var menuNavData = {
 	nameUl : "МЕНЮ", 
 	liItems: [
 		{
