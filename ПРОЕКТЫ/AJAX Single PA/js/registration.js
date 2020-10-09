@@ -40,6 +40,13 @@ function constructor(obj, template, place) {
 
 
 
+
+
+
+
+
+
+
 							/*КНОПКИ ВХОДА*/
 
 constructor(autorizationMenu, registrationBlock, navBlock);
