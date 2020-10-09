@@ -1,0 +1,31 @@
+body {
+	background: #ADABAB;
+	font: 1em Arial;
+}
+
+#container {
+	background: rgba(0,0,0,.3);
+	width: 450px;
+	height: 350px;
+	margin: 80px;
+	line-height: 150px;
+	text-align: center;
+	font-size: 1.2em;
+	color: #fff;
+	border: 3px solid #fff;
+	border-radius: 8px;
+	transform: rotate3d(1,1,1,40deg);
+
+	box-shadow: 3px 3px 3px #000000;
+}
+
+#wrapper {
+	perspective: 500px;
+	width: 400px;
+	height: 200px;
+}
+
+#iframe {
+	width: 450px;
+	height: 350px;
+}

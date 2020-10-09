@@ -1,0 +1,10 @@
+body {
+	background: #ccc;
+	font-family: "PT Sans", Arial;
+	font-size: 18px;
+	text-shadow: 0 1px 0 #eee, 3px 3px 3px #000;
+}
+
+.big {
+	font-size: 0.8em;
+}

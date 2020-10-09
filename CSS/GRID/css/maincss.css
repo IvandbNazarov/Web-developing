@@ -1,0 +1,135 @@
+.grid div {
+	background-color: #56F607;
+	border: 1px solid #24B008;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+}
+.grid div:nth-child(odd) {
+	background-color: #0ED004;
+}
+
+.grid {
+	/* width: 100%; */
+	/* display: grid; */
+	/* grid-template-columns: 200px 200px 200px 200px; */
+	/* grid-template-columns: 200px 1fr 2fr 1fr; */
+	/* grid-template-rows: 150px 150px 150px; */
+	/* grid-auto-rows: 200px; */
+	/* grid-column-gap: 20px; */
+	/* grid-row-gap: 20px; */
+	/* grid-gap: 20px 40px; */
+
+	/* grid-template-columns: 200px 200px 200px 200px; */
+	/* grid-template-columns: 100px repeat(2,200px 300px); */
+
+	/* grid-template-columns: minmax(200px,auto) 1fr 2fr 1fr; */
+
+	/* grid-template-columns: repeat(4,1fr); */
+	/* grid-template-rows: repeat(3,150px); */
+	/* grid-auto-flow: column; */
+
+	/* grid-template-columns: repeat(auto-fill,minmax(60px, 200px)); */
+
+	/* justify-content: center; */
+
+	/* align-items: center; */
+
+	/* grid-template: repeat(auto-fill, 150px)/ repeat(4, 200px); */
+}
+
+.grid div:nth-child(1) {
+/* grid-column-start: 1; */
+/* grid-column-end: 3; */
+
+/* grid-column: 3/-1; */
+/* grid-row: 3; */
+
+/* align-self: center; */
+/* justify-self: center; */
+}
+
+
+
+/* .grid {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-areas: 
+		"header"
+		"article"
+		"aside"
+		"footer";
+}
+
+@media(min-width: 640px) {
+	.grid {
+		grid-template-columns: 2fr 4fr;
+		grid-template-areas: 
+			"header header"
+			"aside article"
+			"aside footer"
+	}
+}
+
+header {
+	grid-area: header;
+
+	background-color: #56F607;
+	border: 1px solid #24B008;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+}
+
+article {
+	grid-area: article;
+
+	background-color: #0ED004;
+	border: 1px solid #24B008;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+}
+
+
+aside {
+	grid-area: aside;
+
+	background-color: #56F607;
+	border: 1px solid #24B008;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+}
+
+footer {
+	grid-area: footer;
+
+	background-color: #0ED004;
+	border: 1px solid #24B008;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+}
+ */
+
+
+
+
+
+
+ .grid {
+ 	display: grid;
+    grid-template-columns: repeat(4, 2fr);
+    grid-gap: 20px;
+ }
+
+ .grow {
+ 	display: grid;
+ 	grid-template-columns: 1fr 1fr;
+ 	grid-gap: 5px;
+ }
+
+ .grow div {
+ 	background-color: #033A02!important;
+ }

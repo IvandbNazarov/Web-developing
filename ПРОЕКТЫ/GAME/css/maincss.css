@@ -1,0 +1,118 @@
+* {
+	background-color: #8E8888;
+}
+
+#shell {
+	background-color: #8E8888;
+	width: 80%;
+	margin: 20px auto;
+}
+
+#hpBar {
+	background-color: #8E8888;
+	width: 100%;
+	height: 150px;
+	display: flex;
+}
+
+#startBtn {
+	background-color: #8E8888;
+	width: 100%;
+	height: 150px;
+	display: flex;	
+    justify-content: center;
+    border-top: 5px solid white;
+}
+
+#textBar {
+	background-color: #8E8888;
+	width: 100%;
+	height: 200px;
+	border-top: 5px solid white;
+}
+
+.monster {
+	background-color: #F69600;
+	height: 120px;
+	margin: auto auto;
+	padding: 10px 10px;
+}
+
+.human {
+	background-color: #F69600;
+	height: 120px;
+	margin: auto auto;
+	padding: 10px 10px;
+}
+
+.monsterHp {
+	background-color: #FF0303;
+	width: 400px;
+	height: 50px;
+	margin: auto auto;
+	border: 2px solid black;
+	overflow: hidden;
+}
+
+#monsterIn {
+	width: 100%;
+	height: 50px;
+	background-color: #00FC0C;
+	position: relative;
+	transition: width 2s;
+}
+
+.humanHp {
+	background-color: #FF0303;
+	width: 400px;
+	height: 50px;
+	margin: auto auto;
+	border: 2px solid black;
+	position: relative;
+	overflow: hidden;
+}
+
+#humanIn {
+	width: 100%;
+	height: 50px;
+	background-color: #00FC0C;
+	position: relative;
+	transition: width 2s;
+}
+
+.text {
+	width: 100%;
+	height: 100px;	
+}
+
+
+button {
+	font-size: 24px;
+	height: 50px;
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 40%;
+	background-color: blue;
+}
+
+h2 {
+	background-color: #F69600;
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+.consoleElem {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.resetTransition {
+	transition: none!important;
+}

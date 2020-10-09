@@ -1,0 +1,94 @@
+body {
+	background-color: #B0AEAE;
+	margin: 50px 30px;
+}
+
+#header {
+	width: 100%;
+	height: 250px;
+	background-color: #17BEC8;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+#navigation {
+	margin-top: 30px;
+}
+
+.nav {
+	cursor: pointer;
+}
+
+.navintro {
+	cursor: pointer;
+}
+
+.title {
+	text-align: center;
+	margin-top:25px;
+}
+
+.registration {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.registration input {
+	margin-top: 5px;
+}
+
+.registr {
+	display: block;
+	margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+#main {
+	background-color: #767474;
+	padding-top: 40px;
+}
+
+.about {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mainText {
+	display: flex;
+	margin: 0 150px;
+	text-align: center;
+}
+
+
+
+
+
+
+#footer {
+	width: 100%;
+	height: 200px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	background-color: #3E3E3E;
+}
+
+.contact {
+	text-align: center;
+	list-style-type: none;
+}
+
+.social {
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.contact li h2 {
+	cursor: pointer;
+}

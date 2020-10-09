@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/maincss.css">
+</head>
+<body>
+	<form action="" method="post" id="form" >
+		<div class="registration">
+			<h1>РЕГИСТРАЦИЯ</h1>
+			<p>Пожалуйста заполните данные, чтобы создать аккаунт</p>
+
+			<label for="email"><b>Введите Email</b></label>
+			<input id="email" type="text" placeholder="Введите Email" name="email">
+
+			<label for="pass"><b>Пароль</b></label>
+			<input id="pass" type="password" placeholder="Введите Пароль" name="pass">
+
+			<label for="pass-repeat"><b>Повторите парроль</b></label>
+			<input id="pass-repeat" type="password" placeholder="Повторите Пароль" name="pass-repeat">
+
+			<label for="textarea">Комментарии</label>
+			<textarea name="area" id="area" cols="25" rows="5"></textarea>
+
+			<p>Если заполнили данные, нажмите кнопку "Регстрация"</p>
+			<input onclick="validate(document.getElementById('form'))" type="button" name="submit" value="ОТПРАВИТЬ">
+		</div>
+	</form>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+body {
+	font-family: Arial;
+	color: #444;
+}
+
+.container {
+	background: #ccc;
+	border: 3px solid #777;
+}
+
+.container:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+}
+
+p {
+	padding: 15px;
+}
+
+img {
+	float: left;
+	height: 300px;
+}
+
+.text1 {
+	float: left;
+	width: 300px;
+}
+
+.text2 {
+	clear: both;
+}

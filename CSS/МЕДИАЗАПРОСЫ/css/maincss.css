@@ -1,0 +1,31 @@
+.cute {
+	background: #AE2020;
+	margin: 15px;
+	padding: 15px;
+	height: 100px;
+	width: 1800px; 
+}
+.fuze{
+	background: #EE10DC;
+	max-width: 1140px;
+	min-width: 400px;
+	height: 400px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media (max-width: 1600px) {
+	.cute {
+		width: 800px;
+	}
+}
+@media (max-width: 800px) {
+	.cute {
+		width: 500px;
+	}
+}
+@media (max-width: 400px) {
+	.cute {
+		width: 200px;
+	}
+}

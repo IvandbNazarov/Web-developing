@@ -1,0 +1,106 @@
+#wrapper {
+	background-color: #49B549;
+	display: grid;
+	grid-template-areas: 
+	"header header menulogo"
+	"nav main main"
+	;
+	grid-template-rows: 100px 500px;
+	grid-auto-columns: 1fr 1fr 1fr;
+	grid-gap: 5px;
+}
+
+#header {
+	background-color: #48BAE4;
+	grid-area: header;
+}
+
+#menulogo {
+	background-color: #48BAE4;
+	grid-area: menulogo;
+}
+
+#nav {
+	background-color: #48BAE4;
+	grid-area: nav;
+}
+
+#main {
+	background-color: #48BAE4;
+	grid-area: main;
+}
+
+#footer {
+	background-color: #48BAE4;
+	grid-area: footer;
+}
+
+
+							/*NAV BUTTON*/
+
+#logIn {
+	font-size: 30px;
+	border-radius: 5px;
+	color: #0C50FE;
+	box-shadow: 1px 1px #040404;
+	background-color: #ABABAB;
+	display: flex;
+	margin: 75px auto;
+}
+
+#logIn:hover {
+	background-color: #EAE6E6;
+	transition: background-color 1s;
+}
+
+#registr {
+	font-size: 30px;
+	border-radius: 5px;
+	color: #0C50FE;
+	box-shadow: 1px 1px #040404;
+	background-color: #ABABAB;
+	display: flex;
+	margin: 20px auto;
+}
+
+#registr:hover {
+	background-color: #EAE6E6;
+	transition: background-color 1s;
+}
+
+
+							/*REGISTRATION FORM*/
+
+
+.inputform {
+	margin: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.inputform label {
+	display: block;
+	text-align: center;
+
+}
+
+.inputform button {
+	width: 100%;
+}
+
+.inputform input {
+	display: block;
+	margin: 2px;
+}
+
+
+
+
+								/*PRODUCT TEMPLATE*/
+
+
+img {
+	width: 150px;
+	height: 200px;
+}								

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/registration.css">
+	<link rel="stylesheet" href="./css/bootstrap.css">
+	<link rel="stylesheet" href="./css/jquery.fancybox.min.css">
+</head>
+<body>
+
+	<div id="wrapper">
+		<div id="header"></div>
+		<div id="menulogo"></div>
+		<div id="nav"></div>
+		<div id="main"></div>
+	</div>
+
+	<div id="modal"></div>
+
+
+<script id="registrationTemplate" type="text/x-handlebars-template">
+	
+	<button id="logIn">{{nameLogin}}</button>
+	<button id="registr">{{nameRegistr}}</button>
+
+</script>
+
+
+
+<script id="registrationForm" type="text/x-handlebars-template">
+
+	<div class="inputform">
+		<div class="olduser">
+			<form action="POST">
+				<label for="email">{{olduser.email}}</label>
+				<input id="email" type="text" name="email" placeholder="Введите EMAIL">
+				<label for="password">{{olduser.password}}</label>
+				<input id="oldpassword" type="password" name="password" placeholder="Введите ПАРОЛЬ">
+				<button class="oldbtn">{{olduser.button}}</button>
+			</form>
+		</div>
+		<div class="newuser">
+				<form action="POST">
+				<label for="email">{{newuser.email}}</label>
+				<input id="newemail" type="text" name="email" placeholder="Введите EMAIL">
+				<label for="password">{{newuser.password}}</label>
+				<input id="newpassword" type="password" name="password" placeholder="Придумайте ПАРОЛЬ">
+				<input type="password" name="password" placeholder="Повторите ПАРОЛЬ">
+				<button class="newbtn">{{newuser.button}}</button>
+			</form>
+		</div>
+	</div>
+		
+</script>
+
+
+<script id="newProduct" type="text/x-handlebars-template">
+
+	<div id="createProduct">
+		<form action="POST"></form>
+			<h2>{{title}}</h2>
+			<label for="productName">{{name}}</label>
+			<input class="productName" type="text" name="productName" placeholder="Введите название">
+			<label for="price">{{price}}</label>
+			<input class="count" type="number" name="price" placeholder="Укажите цену">
+			<label for="image">{{addphoto}}</label>
+			<input type="file" name="image" id="productImage" placeholder="Загрузите	фотографию">	
+			<button class="create">{{button}}</button>
+		</form>
+	</div>
+
+</script>
+
+
+<script id="mainMenu" type="text/x-handlebars-template">
+
+	<ul class="menu">{{nameUl}}
+		{{#each liItems}}
+			<li class={{this.className}}>{{this.name}}</li>
+		{{/each}}
+	</ul>
+
+</script>
+
+
+<script id="productTemplate" type="text/x-handlebars-template">
+
+	{{#each this}}
+		<div class="productBlock">
+			<img src="http://localhost:3000/{{this.productImage}}" alt="">
+			<span>Наименование: {{this.name}}</span>
+			<span>Price: {{this.price}}</span>
+			<a href="#" data-id="{{this._id}}" class="change btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
+			<a href="#" data-id="{{this._id}}" class="delete">Удалить</a>
+			<div class="formGroup">
+				<a href="#" data-id="{{this._id}}" class="orderProduct">Заказать</a>
+				№ <input type="number" class="quanityInput">
+			</div>
+		</div>
+	{{/each}}
+
+</script>
+
+
+<script id="product" type="text/x-handlebars-template">
+
+      	<div class="product">
+			<img src="http://localhost:3000/{{productImage}}" alt="">
+			<span>Наименование: {{name}}</span>
+			<span>Price: {{price}}</span>
+			<a href="#" data-id="{{_id}}" class="change btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
+			<a href="#" data-id="{{_id}}" class="delete">Удалить</a>
+			<div class="formGroup">
+				<a href="#" data-id="{{_id}}" class="orderProduct">Заказать</a>
+				№ <input type="number" class="quanityInput">
+			</div>
+		</div>
+
+</script>
+
+
+	<script src="./js/jquery.js"></script>
+	<script src="./js/bootstrap.js"></script>
+	<script src="./js/handlebars.js"></script>
+	<script src="./js/jquery.fancybox.min.js"></script>
+	<script src="./js/template.js"></script>
+	<script src="./js/registration.js"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,38 @@
+.parent {
+	width: 100%;
+	border: 2px solid #F60707;
+	height: 400px;
+}
+
+.item {
+	height: 50px;
+	margin: 10px;
+	background-color: #131EF4;
+	color: white;
+}
+
+.parent {
+	display: flex;
+	/*По дефолту flex-direction ROW*/
+	/* flex-direction: row-reverse;  */
+	/* flex-direction: column-reverse; */
+	/* flex-wrap: wrap; */
+	/* justify-content: space-around; */
+/*Расстояние между блоками делает одинаково и по сторонам*/
+	/* align-items: stretch; */
+	/* align-content: space-around; */
+}
+
+.item {
+	width: 100px;
+	/* width: 30%; */	
+}
+
+.item:nth-child(2) {
+order: 0;
+/* flex-grow: 1; */
+/* flex-shrink: 1; */
+/* width: 40%; */
+align-self: flex-end;
+height: 50px;
+}

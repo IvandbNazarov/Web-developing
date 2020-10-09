@@ -1,0 +1,37 @@
+body {
+	background-color:#111;
+}
+	
+body{
+	background: grey;
+}
+.document{
+	max-width: 720px;
+	margin: 30px auto;
+	padding: 30px;
+	background: white;
+}
+span {
+	color:green;	
+}
+.desc_cat {
+	font-size:20px;
+}
+#first_label {
+	font-weight:bold;
+}
+#cat_block{
+	transition: all 3s;
+}
+.rollout{
+	margin-left: 300px;
+}
+.size_why .font_style {
+	font-weight: bold; 
+}
+.desc_cat.color_cat {
+	color:blue;
+}
+span,td {
+	text-decoration:underline;
+}

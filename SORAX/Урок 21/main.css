@@ -1,0 +1,49 @@
+* {
+	transition: all .5s;
+}
+
+body {
+	font: 1em Arial;
+	background: #B7B4B4;
+	padding-top: 15px;
+}
+
+.block {
+	background: #333;
+	width: 940px;
+	height: 200px;
+	margin: 5px auto;
+	border-radius: 5px;
+	box-shadow: 0 2px 2px rgba(0,0,0,.4);
+	position: relative;
+}
+
+@media only screen and (min-width: 610px){
+	.block:after {
+		content: "";
+		position: absolute;
+		top: 10px;
+		left: -10px
+		border-radius: 5px;
+		background: #222;
+		padding: 10px;
+		color: #eee;
+	}
+}
+
+@media only screen and (max-width: 950px) {
+	.block {
+		width: 600px;
+		background: #1F611F;
+	}
+}
+
+@media only screen and (max-width: 610px) {
+	.block {
+		width: 320px;
+		background: #D514A5;
+	}
+	.second, .third {
+		height: 50px;
+	}
+}

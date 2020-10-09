@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/maincss.css">
+</head>
+<body>
+
+	<div id="shell">
+		
+		<div id="hpBar">
+			<div class="monster">
+				<h2>MONSTER HP</h2>
+				<div class="monsterHp"><div id="monsterIn"></div></div>
+			</div>
+			<div class="human">
+				<h2>HUMAN HP</h2>
+				<div class="humanHp"><div id="humanIn"></div></div>
+			</div>
+		</div>
+
+		<div id="startBtn">
+			<button onclick="startGame()">ACTION</button>
+			<button onclick="newGame()">NEW GAME</button>
+		</div>
+
+		<div id="textBar">
+			<div class="text">
+				<h3>GAME MOVE</h3>
+				<p id="textIn"></p>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/jquery.js"></script>
+	<script src="./js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+@font-face {
+	font-family: "motherfucker";
+	src: url(../../GrenzeGotisch-VariableFont_wght.ttf);
+}
+.text {
+	color: #DD2D42;
+	font-family: "motherfucker";
+}

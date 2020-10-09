@@ -1,0 +1,173 @@
+.parent{
+	border:5px solid lightcoral;
+}
+.item{
+	height:50px;
+	margin:5px;
+	background:deepskyblue;
+	color:white;
+	text-align:center;
+	line-height: 50px;
+	font-weight:600;
+}
+
+/*------display:flex--------*/
+
+/*.parent{
+	display:flex;
+	flex-direction:row-reverse;переворачивает строку, с лева-направо(в том числе порядок)
+	flex-direction:column-reverse;
+}
+
+.item{
+	width:50px;
+}*/
+
+
+/*------flex-wrap:nowrap;--------*/
+/*Дочерние эелементы занимают столько места, сколько написано*/
+
+
+/*.parent{
+	display:flex;
+	flex-wrap:wrap;
+	отсчет начинается с нижнего левого угла
+flex-wrap:wrap-reverse;
+}
+
+.item{
+	width:30%; 
+}*/
+
+
+/*------justify-content:flex-start;--------*/
+/*Порядок дочерних элементов не меняется, "flex-end" - контент отображается по правому краю, "center" - по центру*/
+/*"space-between" - все элементы занимают всю ширину родительского элемента, сами не растягиваются*/
+/*"space-around" - дочерние эелементы занимают всю ширину родителя, добавляются отсутпы в начале и в конце*/
+
+/*.parent{
+	display:flex;
+	justify-content:space-around;
+}
+
+.item{
+	width:50px;
+
+}
+*/
+
+/*------align-items:flex-start;--------*/
+/*"flex-end" - дочерние элементы отображаются снизу родительского контейнера*/
+/*"center" - дочерние элементы отображаются по центру родительского контейнера*/
+/*"stretch" - дочерние эелементы растягиваются по высоте родительского контейнера, если у них не задана высота*/
+/*"baseline" - дочерние элементы отображаются по начальной линии*/
+
+
+/*.parent{
+	height:200px;
+	display:flex;
+	justify-content:space-around;
+	align-items:baseline;
+}
+
+.item{
+	width:50px;
+
+}
+
+.item:nth-child(3){
+	font-size:80px;
+}
+*/
+
+/*------align-content:center;--------*/
+/*"center" - все дочерние элементы отображаются по центру родительского контейнера*/
+/*"flex-end" - дочерние эелементы располагаются снизу родительского контейнера*/
+/*"space-around" - элементы занимают весь родительский контейнер с отступом сверху и снизу*/
+/*"space-between" - элементы занимают весь родительский контейнер без отступов*/
+
+/*.parent{
+	height:200px;
+	display:flex;
+	flex-wrap:wrap;
+	align-content:space-between;
+	flex-direction:column;
+}
+
+.item{
+	width:20%;
+}*/
+
+
+/*------Свойства дочерних элементов для родителяч ("flex")--------*/
+/*"order" - присваивает дочернему элементу порядковый номер ,по уморчанию у всех элементов 0*/
+
+/*.parent{
+	height:200px;
+	display:flex;
+}
+
+.item{
+	width:20%;
+}
+.item:nth-child(1){
+	order:1;
+}
+.item:nth-child(3){
+	order:1;
+}
+.item:nth-child(5){
+	order:3;
+}*/
+
+
+/*------flex-grow:0;--------*/
+/*"flex-grow:1" - ширина элементов*/
+
+
+/*.parent{
+	height:200px;
+	display:flex;
+}
+.item{
+	flex-grow:1;
+}
+
+.item:nth-child(1){
+	flex-grow:3;
+}
+.item:nth-child(4){
+	flex-grow:8;
+}*/
+
+/*------flex-shrink:0;  flex-basis--------*/
+/*указанный дочерний элементь уменьшается, если окружающие элементы могут занять больше места*/
+/*"flex-basis" - минимальная ширина/высота элемента*/
+/*.parent{
+	height:800px;
+	display:flex;
+	flex-direction:column;
+}
+.item{
+	width:150px;
+}
+
+.item:nth-child(1){
+	flex:1 3 30px;
+}*/
+
+
+/*-------align-self------*/
+/*положение элемента относительно родительского контейнера*/
+
+/*.parent{
+	height:200px;
+	display:flex;
+}
+.item{
+	width:150px;
+}
+.item:nth-child(1){
+	align-self:stretch;
+	height:auto;
+}*/

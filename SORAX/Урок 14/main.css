@@ -1,0 +1,43 @@
+body {
+	background: #FFFFFF
+}
+
+.button {
+	display: inline-block;
+	margin: 40px;
+	width: 100px;
+	height: 100px;
+	background: #FFFFFF;
+	cursor: pointer;
+	border-radius: 50%;
+
+	box-shadow: 0 3px 20px rgba(0,0,0,.25), inset 0 2px 0 rgba(255,255,255,.6), 0 2px 0 rgba(0,0,0,.1), inset 0 0 20px rgba(0,0,0,.1);
+}
+
+.button:hover {
+	box-shadow: inset 0 0 20px rgba(0,0,0,.4), 0 2px 0 rgba(255,255,255,.6), inset 0 2px 0 rgba(0,0,0,.1);	
+}
+
+.button::after {
+	content: "";
+	height: 100px;
+	width: 100px;
+	display: block;
+	opacity: .7;
+}
+
+.photo::after {
+	background: url(./VK.png) center no-repeat;
+}
+
+.settings::after {
+	background: url(./INST.png) center no-repeat;
+}
+
+.tag::after {
+	background: url(./about.png) center no-repeat;
+}
+
+.button:hover::after {
+	background-position: center 52%;
+}

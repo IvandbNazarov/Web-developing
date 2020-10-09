@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="block"></div>
+	<div class="block">
+		<div class="inner_block inner_block0"></div>
+		<div class="inner_block inner_block1"></div>
+		<div class="inner_block inner_block2"></div>
+	</div>
+	<div class="block">		
+		<div class="absolute_block absolute_block0"></div>
+		<div class="absolute_block absolute_block1"></div>
+		<div class="absolute_block absolute_block2"></div>
+	</div>
+<table border="1">
+	<thead>
+		<tr>
+			<td>Static</td>
+			<td>Relative</td>
+			<td>Absolute</td>
+			<td>Fixed</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<ul>
+					<li>Нельзя применить свойства "left, right, top, bottom".</li>
+					<li>Нельзя применить свойства "z-index".</li>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li>Можно применить свойства "left, right, top, bottom".</li>
+					<li>Можно применить свойства "z-index".</li>
+					<li>Элемент будет двигаться относительно своей стартовой позиции.</li>
+					<li>При движении окружающие его эл-ты будут вести себя, будто он находится на своей стартовой позиции.</li>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li>Можно применить свойства "left, right, top, bottom".</li>
+					<li>Можно применить свойства "z-index".</li>		
+					<li>Элемент будет дигаться относительно первого родителя со свойством "position:relative".</li>
+					<li>Если у элемента нет родителя со свойством "position:relative", то элемент будет двигаться относительно окна браузера. </li>	
+					<li> Если элемент не обладает свойствами "widht, height" при применении всех свойст "left, right, top, left" элемент растягивается относительно родителя со свойством "position:relative" или относительно окна браузера. </li>	
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li>Можно применить свойства "left, right, top, bottom".</li>
+					<li>Можно применить свойства "z-index".</li>				
+					<li>Позиционируется-закрепляется относительно окна браузера.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>	
+</table>
+
+</body>
+</html>

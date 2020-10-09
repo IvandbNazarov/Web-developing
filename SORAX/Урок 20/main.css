@@ -1,0 +1,32 @@
+body {
+	background: #A9A7A7;
+	font: 1em Arial;
+}
+
+@font-face {
+	font-family: Podkova;
+	src: url(./podkova_medium.ttf);
+	src: local('&%$'), url(./podkova_medium.ttf) format("ttf"), url(./podkova_bold.ttf) format("ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: Podkova;
+	src: url(./podkova_bold.ttf);
+	font-weight: bold;
+}
+
+section {
+	margin: 3px 40px;
+	padding: 20px;
+}
+
+section span {
+	font-weight: bold;
+}
+
+.label {
+	font-family: Podkova;
+	font-size: 2.4em;
+	text-shadow: 0 1px 0 white;
+}

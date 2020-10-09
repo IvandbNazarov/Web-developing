@@ -1,0 +1,19 @@
+body {
+	font: 1em Arial;
+}
+
+.container {
+	background: #999;
+	width: 300px;
+	height: 200px;
+	overflow: auto;
+	display: none;
+}
+
+
+a {
+	display: block;
+	height: 100px;
+	width: 500px;
+	background: #888;
+}

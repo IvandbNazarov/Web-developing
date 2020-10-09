@@ -1,0 +1,24 @@
+@font-face{
+	font-family:"Arsenal";
+	src:url(fonts/Arsenal/Arsenal-Regular.ttf) format("truetype");
+	font-weight:normal;
+}
+@font-face{
+	font-family:"Arsenal";
+	src:url(fonts/Arsenal/Arsenal-Bold.ttf) format("truetype");
+	font-weight:bold;
+}
+@font-face{
+	font-family:"Podkova";
+	src:url(fonts/Podkova/Podkova-Regular.ttf) format("truetype");
+}
+
+
+
+.text{
+	font-family:arsenal;
+	font-weight: bold;
+}
+.head{
+	font-family:podkova;
+}

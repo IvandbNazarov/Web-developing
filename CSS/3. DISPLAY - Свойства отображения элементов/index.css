@@ -1,0 +1,29 @@
+body{
+	background-color:white;
+	
+}
+.style_div {
+	width:150px;
+	height:150px;
+	background-color:green;
+	margin:5px;
+	display:inline-block;
+}
+.special {
+	height:50px;
+}
+span span{
+	font-size:70px;
+}
+.button{
+	display:inline-block;
+	border-radius:30px;
+	background:lightblue;
+	text-align:center;
+	width:170px;
+	height:115px;
+	line-height: 115px;
+}
+.vertical{
+	vertical-align:bottom;
+}
