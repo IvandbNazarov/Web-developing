@@ -25,6 +25,7 @@ var menuBlock = $("#mainMenu");
 var productTemplateBlock = $("#productTemplate");
 var oneProduct = $("#product");
 var editProductBlock = $("#editProduct");
+var ordersTemplateBlock = $("#ordersTemplate");
 
 var token;
 
@@ -107,7 +108,7 @@ function logIn(callback) {
 
 
 
-function addProduct(){
+function addProduct(callback){
 	var formData = new FormData();
 	    formData.append("productimage", $("#productImage").prop("files")[0]);
 	    formData.append("name", $(".productName").val());
@@ -122,7 +123,8 @@ function addProduct(){
 	    },
 	    data: formData,
 	    success: function(r){
-	      alert("Продукт успешно добавлен!");
+	      if (callback) 
+	      	callback();
 	    }
 	})
 }
@@ -130,11 +132,11 @@ function addProduct(){
 
 
 
-function changeProduct(id){
+function changeProduct(id, callback){
 	var formData = new FormData();
 	    formData.append("productimage", $("#productImage").prop("files")[0]);
-	    formData.append("name", "Milk");
-	    formData.append("price", 100);
+	    formData.append("name", $(".editProductName").val());
+	    formData.append("price", $(".editCount").val());
 	$.ajax({
   		method:'PATCH',
     	url:"http://localhost:3000/products/"+ id,
@@ -145,10 +147,12 @@ function changeProduct(id){
 	    },
 	    data: formData,
    		success: function(response){
-    		alert("Продукт изменен!");
+    		if(callback)
+    			callback();
     	}
   	})
 }
+
 
 
 
@@ -185,16 +189,17 @@ function getProductData(elem, callback){
 
 
 
-function deleteProduct(id){
+function deleteProduct(id, callback){
 	$.ajax({
 	    method:'DELETE',
 	    url:"http://localhost:3000/products/" + id,
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	    data: formData,
 	    success: function(response){
-	    	alert("Продукт удален!");
+	    	if (callback) 
+	    		callback();
+
 	    }
 	})
 }
@@ -208,9 +213,10 @@ function getOrders(){
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	    data: formData,
 	    success: function(response){
+	    	debugger;
 	    	alert("Вот список всех заказов!");
+	    	constructor(response.orders, ordersTemplateBlock, mainBlock);
 	    }
 	})
 }
@@ -233,7 +239,7 @@ function getOrder(id){
 
 
 
-function deleteProduct(id){
+function deleteOrder(id){
 	$.ajax({
 	    method:'DELETE',
 	    url:"http://localhost:3000/orders/" + id,
@@ -249,18 +255,17 @@ function deleteProduct(id){
 
 
 
-function addOrder(){
+function addOrder(element){
 	$.ajax({
 	    method:'POST',
 	    url:"http://localhost:3000/orders",
 	    data:{
-			productId:$('.input_class').val(),
-			quantity:$('.'),
+			productId: element.dataset.id,
+			quantity:$(element).siblings("input").val()
 	    },
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	    data: formData,
 	    success: function(r){
 	      alert("Заказ успешно добавлен!");
 	    }
@@ -303,17 +308,23 @@ $('body').on("click", ".newbtn", function(e){
 
 								/*КНОПКИ МЕНЮ*/
 
-$("body").on("click",".add", function(){
-	$("#main").empty();
+$("body").on("click", ".add", function(){
 	constructor(createProductBlockData, productBlock, mainBlock);
 })
 
 
 
 $("body").on("click", ".mainpage", function(){
-	$("#main").empty();
 	getProducts();
 })
+
+
+$("body").on("click", ".orderspage", function(){
+	getOrders();
+})
+
+
+								/*ПРОДУКТЫ*/
 
 
 $("body").on("click", ".productBlock .change", function(event){
@@ -324,15 +335,39 @@ $("body").on("click", ".productBlock .change", function(event){
       	})			
 	});	
 })
+
+
 $("body").on("click", ".productBlock .delete", function(event){
 	getProductData(event.target);	
 })
 
 
-
-
-
 $("body").on("click", ".create", function(event){
-	addProduct();
-	getProducts();
+	addProduct(function(){
+		getProducts();
+	})
+})
+
+
+
+$("body").on("click", ".saveChanges", function (event){
+	changeProduct(event.target.dataset.id, function(){
+		getProducts();
+		$.fancybox.close();
+	});
+})
+
+
+$("body").on("click", ".delete", function(event){
+	deleteProduct(event.target.dataset.id, function(){
+		getProducts();
+	})
+})
+
+
+									/*ЗАКАЗЫ*/
+
+
+$("body").on("click", ".orderProduct", function(event){
+	addOrder(event.target);
 })
