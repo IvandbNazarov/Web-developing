@@ -318,6 +318,7 @@ $("body").on("click", ".mainpage", function(){
 
 
 $("body").on("click", ".orderspage", function(){
+	debugger;
 	getOrders(function(response){
 		constructor(makeSum(response), ordersTemplateBlock, mainBlock);
 	});
@@ -330,6 +331,7 @@ function makeSum (response){
 		count: 0
 	};
 	response.map(function(item){
+		if (!item.product) return;
 		item.totalprice = item.quantity*item.product.price;
 		result.price += item.totalprice;
 		result.count += item.quantity;
@@ -390,7 +392,7 @@ $("body").on("click", ".orderProduct", function(event){
 
 $("body").on("click", ".deleteOrder", function(event){
 	deleteOrder(event.target.dataset.id, function(){
-		getOrders();
+		$(".orderspage").trigger("click");
 	})
 })
 
