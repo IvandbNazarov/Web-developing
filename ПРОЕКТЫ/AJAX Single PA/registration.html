@@ -139,20 +139,20 @@
 
 
 
-<script id="productTemplate" type="text/x-handlebars-template">
+<script id="ordersTemplate" type="text/x-handlebars-template">
 
-	{{#each this}}
+	{{#each response}}
 		<div class="ordersBlock">
-			<span>Наименование: {{this.name}}</span>
-			<span>Price: {{this.price}}</span>
-			<a href="#" data-id="{{this._id}}" class="change btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
-			<a href="#" data-id="{{this._id}}" class="delete">Удалить</a>
-			<div class="formGroup">
-				<a href="#" data-id="{{this._id}}" class="orderProduct">Заказать</a>
-				№ <input type="number" class="quanityInput">
-			</div>
+			<span>Наименование: {{this.product.name}}</span>
+			<span>Price: {{this.product.price}}</span>
+			<span>Количетсво: {{this.quantity}}</span>
+			<span>Общая цена: {{this.totalprice}}</span>
+			<a href="#" data-id="{{this._id}}" class="deleteOrder">Удалить</a>
 		</div>
 	{{/each}}
+	<span>Сумма заказа: {{result.price}}</span>
+	<span>Количество товаров: {{result.count}}</span>
+
 
 </script>
 
@@ -164,6 +164,7 @@
 	<script src="./js/jquery.fancybox.min.js"></script>
 	<script src="./js/template.js"></script>
 	<script src="./js/registration.js"></script>
+
 </body>
 </html>
 

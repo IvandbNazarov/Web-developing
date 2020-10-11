@@ -156,7 +156,7 @@ function changeProduct(id, callback){
 
 
 
-function getProducts(){
+function getProducts(callback){
 	$.ajax({
 	    method:'GET',
 	    url:"http://localhost:3000/products",
@@ -199,14 +199,13 @@ function deleteProduct(id, callback){
 	    success: function(response){
 	    	if (callback) 
 	    		callback();
-
 	    }
 	})
 }
 
 
 
-function getOrders(){
+function getOrders(callback){
 	$.ajax({
 	    method:'GET',
 	    url:"http://localhost:3000/orders",
@@ -214,12 +213,12 @@ function getOrders(){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
 	    success: function(response){
-	    	debugger;
-	    	alert("Вот список всех заказов!");
-	    	constructor(response.orders, ordersTemplateBlock, mainBlock);
+	    	if (callback) 
+	    		callback(response.orders);
 	    }
 	})
 }
+
 
 
 
@@ -230,7 +229,6 @@ function getOrder(id){
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	    data: formData,
 	    success: function(response){
 	    	alert("Вот заказ!");
 	    }
@@ -239,16 +237,16 @@ function getOrder(id){
 
 
 
-function deleteOrder(id){
+function deleteOrder(id, callback){
 	$.ajax({
 	    method:'DELETE',
 	    url:"http://localhost:3000/orders/" + id,
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	    data: formData,
 	    success: function(response){
-	    	alert("Заказ удален!");
+	    	if (callback)
+	    		callback();
 	    }
 	})
 }
@@ -320,8 +318,26 @@ $("body").on("click", ".mainpage", function(){
 
 
 $("body").on("click", ".orderspage", function(){
-	getOrders();
+	getOrders(function(response){
+		constructor(makeSum(response), ordersTemplateBlock, mainBlock);
+	});
 })
+
+function makeSum (response){
+	let newResponse = {};
+	let result = {
+		price: 0,
+		count: 0
+	};
+	response.map(function(item){
+		item.totalprice = item.quantity*item.product.price;
+		result.price += item.totalprice;
+		result.count += item.quantity;
+	})
+	newResponse.response = response;
+	newResponse.result = result;
+	return newResponse;
+}
 
 
 								/*ПРОДУКТЫ*/
@@ -371,3 +387,12 @@ $("body").on("click", ".delete", function(event){
 $("body").on("click", ".orderProduct", function(event){
 	addOrder(event.target);
 })
+
+$("body").on("click", ".deleteOrder", function(event){
+	deleteOrder(event.target.dataset.id, function(){
+		getOrders();
+	})
+})
+
+
+
