@@ -69,18 +69,41 @@ $("#registr").on("click", function(){
 							/*ЗАПРОСЫ*/
 
 
+function request(props, options) {
+  $.ajax({
+    method: props.method,
+    url:"http://localhost:3000/" + props.url,
+    ...options,
+    success: function(response){
 
+      if(props.callback) 
+             props.callback(response)
+    }
+  })
+}
+
+
+
+
+$('body').on("click", ".newbtn", function(e){
+	e.preventDefault();
+	registration();
+});
 
 function registration() {
-	$.ajax({
+	request({
 		method:'POST',
-		url:"http://localhost:3000/user/signup",
+		url:"user/signup",
 		data:{
 			email: $("#newemail").val(),
 			password: $("#newpassword").val(),
 		},
-		success: function(r){
-			alert("Вы успешно зарегистрированы!")
+		callback:  function(response){
+			alert("Вы успешно зарегистрированы!")}
+	},{
+		data:{
+			email: $("#newemail").val(),
+			password: $("#newpassword").val(),
 		},
 		error: function(error){console.log(error)}
 	})
@@ -88,18 +111,25 @@ function registration() {
 
 
 
-function logIn(callback) {
-	$.ajax({
+
+
+$("body").on("click",'.oldbtn', function(e){
+	e.preventDefault();
+	logIn();
+	});
+
+function logIn() {
+	request({
 		method:'POST',
-		url:"http://localhost:3000/user/login",
+		url:"user/login",
+		callback: function(response){
+			token = response.token;
+			getProducts();
+			constructor(menuNavData, menuBlock, navBlock)}
+	},{
 		data:{
 			email: $("#email").val(),
 			password: $("#oldpassword").val(),
-		},
-		success: function(r){
-			token = r.token;
-			if(callback)
-				callback();
 		},
 		error: function(error){alert("WTF")}
 	})
@@ -108,23 +138,38 @@ function logIn(callback) {
 
 
 
-function addProduct(callback){
+
+
+$("body").on("click", ".create", function(event){
+	addProduct();
+})
+
+function addProduct(){
 	var formData = new FormData();
 	    formData.append("productimage", $("#productImage").prop("files")[0]);
 	    formData.append("name", $(".productName").val());
 	    formData.append("price", $(".count").val());
-	$.ajax({
-	    method:'POST',
-	    url:"http://localhost:3000/products",
-	    processData: false,
+	request({
+		method: 'POST',
+		url: "products",
+		callback: getProducts
+	},
+	{
+		processData: false,
 	    contentType: false,
 	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
 	    data: formData,
-	    success: function(r){
-	      if (callback) 
-	      	callback();
+	})
+}
+
+function getProducts(){
+	request({
+		method:'GET',
+	    url:"products",
+	    callback: function (response){
+	    	constructor(response.products, productTemplateBlock, mainBlock)
 	    }
 	})
 }
@@ -132,41 +177,48 @@ function addProduct(callback){
 
 
 
-function changeProduct(id, callback){
+
+
+
+
+$("body").on("click", ".saveChanges", function (event){
+	changeProduct(event.target.dataset.id);
+		$.fancybox.close();
+	});
+
+function changeProduct (id){
 	var formData = new FormData();
 	    formData.append("productimage", $("#productImage").prop("files")[0]);
 	    formData.append("name", $(".editProductName").val());
 	    formData.append("price", $(".editCount").val());
-	$.ajax({
+  	request({
   		method:'PATCH',
-    	url:"http://localhost:3000/products/"+ id,
-    	processData: false,
+    	url:"products/"+ id,
+    	callback: getProducts
+  	},{
+  		processData: false,
 	    contentType: false,
-    	beforeSend: function(xhr){
+	    beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
 	    data: formData,
-   		success: function(response){
-    		if(callback)
-    			callback();
-    	}
   	})
 }
 
 
 
 
-function getProducts(callback){
-	$.ajax({
-	    method:'GET',
-	    url:"http://localhost:3000/products",
-	    success: function(response){
-	    	constructor(response.products, productTemplateBlock, mainBlock);
-	    }
-	})
-}
 
 
+
+$("body").on("click", ".productBlock .change", function(event){
+	getProductData(event.target, function(product){
+	    constructor(product, editProductBlock, $("#modal"));
+	    $.fancybox.open({
+        	src:"#modal",
+      	})			
+	});	
+})
 
 function getProduct(id, callback){
 	$.ajax({
@@ -180,6 +232,15 @@ function getProduct(id, callback){
 	    		callback(response.product);
 	    }
 	})
+/*	request({
+		method:'GET',
+	    url:"products/" + id,
+	    callback: getProductData(response.product)
+	},{
+		beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);
+	    },
+	})*/
 }
 
 function getProductData(elem, callback){
@@ -189,24 +250,43 @@ function getProductData(elem, callback){
 
 
 
-function deleteProduct(id, callback){
-	$.ajax({
-	    method:'DELETE',
-	    url:"http://localhost:3000/products/" + id,
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(response){
-	    	if (callback) 
-	    		callback();
-	    }
+
+
+
+
+
+$("body").on("click", ".productBlock .delete", function(event){
+	getProductData(event.target);	
+})
+
+$("body").on("click", ".delete", function(event){
+	deleteProduct(event.target.dataset.id)
+})
+
+function deleteProduct(id){
+	request({
+		method:'DELETE',
+	    url:"products/" + id,
+	    callback: getProducts
+	},{
+		beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);}
 	})
 }
 
 
 
+
+
+
+$("body").on("click", ".orderspage", function(){
+	getOrders(function(response){
+		constructor(makeSum(response), ordersTemplateBlock, mainBlock);
+	});
+})
+
 function getOrders(callback){
-	$.ajax({
+/*	$.ajax({
 	    method:'GET',
 	    url:"http://localhost:3000/orders",
 	    beforeSend: function(xhr){
@@ -216,113 +296,18 @@ function getOrders(callback){
 	    	if (callback) 
 	    		callback(response.orders);
 	    }
-	})
-}
-
-
-
-
-function getOrder(id){
-	$.ajax({
-	    method:'GET',
-	    url:"http://localhost:3000/orders/" + id,
-	    beforeSend: function(xhr){
+	})*/
+	request({
+		method:'GET',
+	    url:"orders",
+	    callback: function(response){
+			constructor(makeSum(response), ordersTemplateBlock, mainBlock);}
+	},{
+		  beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(response){
-	    	alert("Вот заказ!");
 	    }
 	})
 }
-
-
-
-function deleteOrder(id, callback){
-	$.ajax({
-	    method:'DELETE',
-	    url:"http://localhost:3000/orders/" + id,
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(response){
-	    	if (callback)
-	    		callback();
-	    }
-	})
-}
-
-
-
-function addOrder(element){
-	$.ajax({
-	    method:'POST',
-	    url:"http://localhost:3000/orders",
-	    data:{
-			productId: element.dataset.id,
-			quantity:$(element).siblings("input").val()
-	    },
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(r){
-	      alert("Заказ успешно добавлен!");
-	    }
-	})
-}
-
-
-
-function deleteUser(id){
-	$.ajax({
-	    method:'DELETE',
-	    url:"http://localhost:3000/user/" + id,
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    data: formData,
-	    success: function(response){
-	    	alert("Пользователь удален!");
-	    }
-	})
-}
-
-
-
-							/*КНОПКИ ВХОДА*/
-
-$("body").on("click",'.oldbtn', function(e){
-	e.preventDefault();
-	logIn(function(){
-		getProducts();
-		constructor(menuNavData, menuBlock, navBlock);
-	});
-});
-
-$('body').on("click", ".newbtn", function(e){
-	e.preventDefault();
-	registration();
-});
-
-
-								/*КНОПКИ МЕНЮ*/
-
-$("body").on("click", ".add", function(){
-	constructor(createProductBlockData, productBlock, mainBlock);
-})
-
-
-
-$("body").on("click", ".mainpage", function(){
-	getProducts();
-})
-
-
-$("body").on("click", ".orderspage", function(){
-	debugger;
-	getOrders(function(response){
-		constructor(makeSum(response), ordersTemplateBlock, mainBlock);
-	});
-})
 
 function makeSum (response){
 	let newResponse = {};
@@ -342,59 +327,105 @@ function makeSum (response){
 }
 
 
-								/*ПРОДУКТЫ*/
 
 
-$("body").on("click", ".productBlock .change", function(event){
-	getProductData(event.target, function(product){
-	    constructor(product, editProductBlock, $("#modal"));
-	    $.fancybox.open({
-        	src:"#modal",
-      	})			
-	});	
+
+
+
+
+
+$("body").on("click", ".deleteOrder", function(event){
+	deleteOrder(event.target.dataset.id)
 })
 
-
-$("body").on("click", ".productBlock .delete", function(event){
-	getProductData(event.target);	
-})
-
-
-$("body").on("click", ".create", function(event){
-	addProduct(function(){
-		getProducts();
+function deleteOrder(id, callback){
+	request({
+		method:'DELETE',
+	    url:"orders/" + id,
+	    callback: function(){
+		$(".orderspage").trigger("click");}
+	},{
+		 beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);
+	    }
 	})
-})
+}
 
 
 
-$("body").on("click", ".saveChanges", function (event){
-	changeProduct(event.target.dataset.id, function(){
-		getProducts();
-		$.fancybox.close();
-	});
-})
 
 
-$("body").on("click", ".delete", function(event){
-	deleteProduct(event.target.dataset.id, function(){
-		getProducts();
-	})
-})
 
-
-									/*ЗАКАЗЫ*/
 
 
 $("body").on("click", ".orderProduct", function(event){
 	addOrder(event.target);
 })
 
-$("body").on("click", ".deleteOrder", function(event){
-	deleteOrder(event.target.dataset.id, function(){
-		$(".orderspage").trigger("click");
+function addOrder(element){
+	request({
+		method:'POST',
+	    url:"orders",
+	    callback: function(response){
+	      alert("Заказ успешно добавлен!")}
+	},{
+		data:{
+			productId: element.dataset.id,
+			quantity:$(element).siblings("input").val()
+	    },
+	    beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);
+	    }
 	})
+}
+
+
+
+
+
+
+
+
+
+function getOrder(id){
+	$.ajax({
+	    method:'GET',
+	    url:"http://localhost:3000/orders/" + id,
+	    beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);
+	    },
+	    success: function(response){
+	    	alert("Вот заказ!");
+	    }
+	})
+}
+
+
+
+
+function deleteUser(id){
+	$.ajax({
+	    method:'DELETE',
+	    url:"http://localhost:3000/user/" + id,
+	    beforeSend: function(xhr){
+	    	xhr.setRequestHeader("Authorization", "token " + token);
+	    },
+	    data: formData,
+	    success: function(response){
+	    	alert("Пользователь удален!");
+	    }
+	})
+}
+
+
+								/*КНОПКИ МЕНЮ*/
+
+$("body").on("click", ".add", function(){
+	constructor(createProductBlockData, productBlock, mainBlock);
 })
 
 
 
+$("body").on("click", ".mainpage", function(){
+	getProducts();
+})
