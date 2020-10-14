@@ -16,9 +16,8 @@ console.log("CLICK");
 var mainBlock = $("#main");
 var navBlock = $("#nav");
 var headerBlock = $("#header");
-var menulogoBlock = $("#menulogo");
 
-var formBlock = $("#registrationForm");
+var formBlock = $("#inputForm");
 var registrationBlock = $("#registrationTemplate");
 var productBlock = $("#newProduct");
 var menuBlock = $("#mainMenu");
@@ -26,9 +25,9 @@ var productTemplateBlock = $("#productTemplate");
 var oneProduct = $("#product");
 var editProductBlock = $("#editProduct");
 var ordersTemplateBlock = $("#ordersTemplate");
+var titleBlock = $("#headerTemplate");
 
 var token;
-
 
 
 
@@ -41,33 +40,27 @@ function constructor(obj, template, place) {
 
 							/*КНОПКИ ВХОДА*/
 
+constructor(headerData, titleBlock, headerBlock);
 constructor(autorizationMenuData, registrationBlock, navBlock);
 constructor(registrationBlockData, formBlock, mainBlock);
 
-$(".olduser").hide();
-$(".newuser").hide();
-
+$("#inputform").hide();
 
 $("#logIn").on("click", function(){
-	if ($(".newuser").hide()) {
-		$(".olduser").toggle()
-	} else {
-		return;
-	}
+	$("#inputform").show();
+	if ($("#oldbtn").show()) {
+		$("#newbtn").hide()
+	} 
 });
 
 $("#registr").on("click", function(){
-	if ($(".olduser").hide()) {
-		$(".newuser").toggle()
-	} else {
-		return;
-	}
+	$("#inputform").show();
+	if ($("#newbtn").show()) {
+		$("#oldbtn").hide()
+	} 
 });
 
-
-
 							/*ЗАПРОСЫ*/
-
 
 function request(props, options) {
   $.ajax({
@@ -85,7 +78,7 @@ function request(props, options) {
 
 
 
-$('body').on("click", ".newbtn", function(e){
+$('body').on("click", "#newbtn", function(e){
 	e.preventDefault();
 	registration();
 });
@@ -113,7 +106,7 @@ function registration() {
 
 
 
-$("body").on("click",'.oldbtn', function(e){
+$("body").on("click",'#oldbtn', function(e){
 	e.preventDefault();
 	logIn();
 	});
@@ -129,7 +122,7 @@ function logIn() {
 	},{
 		data:{
 			email: $("#email").val(),
-			password: $("#oldpassword").val(),
+			password: $("#password").val(),
 		},
 		error: function(error){alert("WTF")}
 	})
@@ -179,8 +172,6 @@ function getProducts(){
 
 
 
-
-
 $("body").on("click", ".saveChanges", function (event){
 	changeProduct(event.target.dataset.id);
 		$.fancybox.close();
@@ -209,46 +200,31 @@ function changeProduct (id){
 
 
 
-
-
 $("body").on("click", ".productBlock .change", function(event){
-	getProductData(event.target, function(product){
-	    constructor(product, editProductBlock, $("#modal"));
-	    $.fancybox.open({
-        	src:"#modal",
-      	})			
-	});	
+	getProductData(event.target);	
 })
 
-function getProduct(id, callback){
-	$.ajax({
-	    method:'GET',
-	    url:"http://localhost:3000/products/" + id,
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(response){
-	    	if (callback) 
-	    		callback(response.product);
-	    }
-	})
-/*	request({
+function getProduct(id){
+	request({
 		method:'GET',
 	    url:"products/" + id,
-	    callback: getProductData(response.product)
+	    callback:  function(response){
+	  	 	constructor(response.product, editProductBlock, $("#modal"));
+	  	  	$.fancybox.open({
+        		src:"#modal",
+      	})			
+	}
 	},{
 		beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    },
-	})*/
+	})
 }
 
-function getProductData(elem, callback){
+function getProductData(elem){
 	var productId = $(elem).data("id");
-	getProduct(productId, callback);
+	getProduct(productId);
 }
-
-
 
 
 
@@ -278,32 +254,18 @@ function deleteProduct(id){
 
 
 
-
 $("body").on("click", ".orderspage", function(){
-	getOrders(function(response){
-		constructor(makeSum(response), ordersTemplateBlock, mainBlock);
-	});
+	getOrders();
 })
 
-function getOrders(callback){
-/*	$.ajax({
-	    method:'GET',
-	    url:"http://localhost:3000/orders",
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Authorization", "token " + token);
-	    },
-	    success: function(response){
-	    	if (callback) 
-	    		callback(response.orders);
-	    }
-	})*/
+function getOrders(){
 	request({
 		method:'GET',
 	    url:"orders",
 	    callback: function(response){
-			constructor(makeSum(response), ordersTemplateBlock, mainBlock);}
+			constructor(makeSum(response.orders), ordersTemplateBlock, mainBlock);}
 	},{
-		  beforeSend: function(xhr){
+		beforeSend: function(xhr){
 	    	xhr.setRequestHeader("Authorization", "token " + token);
 	    }
 	})
@@ -331,9 +293,6 @@ function makeSum (response){
 
 
 
-
-
-
 $("body").on("click", ".deleteOrder", function(event){
 	deleteOrder(event.target.dataset.id)
 })
@@ -350,9 +309,6 @@ function deleteOrder(id, callback){
 	    }
 	})
 }
-
-
-
 
 
 
@@ -378,10 +334,6 @@ function addOrder(element){
 	    }
 	})
 }
-
-
-
-
 
 
 
@@ -417,7 +369,6 @@ function deleteUser(id){
 	})
 }
 
-
 								/*КНОПКИ МЕНЮ*/
 
 $("body").on("click", ".add", function(){
@@ -425,7 +376,11 @@ $("body").on("click", ".add", function(){
 })
 
 
-
 $("body").on("click", ".mainpage", function(){
 	getProducts();
 })
+
+$("body").on("click", ".exit", function(){
+    location.reload();
+})
+

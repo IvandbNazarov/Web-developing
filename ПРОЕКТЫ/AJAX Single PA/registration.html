@@ -11,7 +11,6 @@
 
 	<div id="wrapper">
 		<div id="header"></div>
-		<div id="menulogo"></div>
 		<div id="nav"></div>
 		<div id="main"></div>
 	</div>
@@ -22,100 +21,51 @@
 
 
 
+<script id="headerTemplate" type="text/x-handlebars-template">
+
+	<h1 id="headerTitle">{{text}}</h1>
+
+</script>
+
 
 <script id="registrationTemplate" type="text/x-handlebars-template">
 	
-	<button id="logIn">{{nameLogin}}</button>
-	<button id="registr">{{nameRegistr}}</button>
+	{{#each buttons}}
+        <button type="{{this.type}}" class="{{this.class}}" id="{{this.id}}">{{this.text}}</button>
+      {{/each}}
 
 </script>
-
-
-<script id="registrationForm" type="text/x-handlebars-template">
-
-	<div class="inputform">
-		<div class="olduser">
-			<form action="POST">
-				<label for="email">{{olduser.email}}</label>
-				<input id="email" type="text" name="email" placeholder="Введите EMAIL">
-				<label for="password">{{olduser.password}}</label>
-				<input id="oldpassword" type="password" name="password" placeholder="Введите ПАРОЛЬ">
-				<button class="oldbtn">{{olduser.button}}</button>
-			</form>
-		</div>
-		<div class="newuser">
-				<form action="POST">
-				<label for="email">{{newuser.email}}</label>
-				<input id="newemail" type="text" name="email" placeholder="Введите EMAIL">
-				<label for="password">{{newuser.password}}</label>
-				<input id="newpassword" type="password" name="password" placeholder="Придумайте ПАРОЛЬ">
-				<input type="password" name="password" placeholder="Повторите ПАРОЛЬ">
-				<button class="newbtn">{{newuser.button}}</button>
-			</form>
-		</div>
-	</div>
-		
-</script>
-
-
-
-
-
-
-
 
 
 <script id="mainMenu" type="text/x-handlebars-template">
 
-	<ul class="menu">{{nameUl}}
+<li class="menuwrapper"><span class={{classSpan}}>{{nameUl}}</span>
+	<ul class="menu">
 		{{#each liItems}}
 			<li class={{this.className}}>{{this.name}}</li>
 		{{/each}}
 	</ul>
+</li>
 
 </script>
 
 
+<script id="inputForm" type="text/x-handlebars-template">
 
+    <form action="#" class={{formClass}} id={{formId}}>
+      <h3>{{headText}}</h3>
+      {{#each registrationData}}
+        <div class="form-group">
+          <label for={{this.for}}>{{this.text}}</label>
+          <input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+        </div>
+      {{/each}}
 
-
-
-
-
-
-<script id="newProduct" type="text/x-handlebars-template">
-
-	<div id="createProduct">
-		<form action="POST"></form>
-			<h2>{{title}}</h2>
-			<label for="productName">{{name}}</label>
-			<input class="productName" type="text" name="productName" placeholder="Введите название">
-			<label for="price">{{price}}</label>
-			<input class="count" type="number" name="price" placeholder="Укажите цену">
-			<label for="image">{{addphoto}}</label>
-			<input type="file" name="image" id="productImage" placeholder="Загрузите	фотографию">	
-			<button class="create">{{button}}</button>
-		</form>
-	</div>
-
-</script>
-
-
-<script id="editProduct" type="text/x-handlebars-template">
-
-	<div id="createProduct">
-		<form action="POST"></form>
-			<h2>ИЗМЕНЕНИЕ ПРОДУКТА</h2>
-			<label for="productName">Название</label>
-			<input class="editProductName" type="text" name="productName" placeholder="Введите название" value = {{name}}>
-			<label for="price">ЦЕНА</label>
-			<input class="editCount" type="number" name="price" placeholder="Укажите цену" value = {{price}}>
-			<label for="image">ВЫБРАТЬ ФОТО</label>
-			<input type="file" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
-			<button class="saveChanges" data-id="{{_id}}">СОХРАНИТЬ</button>
-		</form>
-	</div>
-
+      {{#each buttons}}
+        <button type="{{this.type}}" class="{{this.class}}" id="{{this.id}}">{{this.text}}</button>
+      {{/each}}
+    </form>
+    
 </script>
 
 
@@ -124,12 +74,12 @@
 	{{#each this}}
 		<div class="productBlock">
 			<img src="http://localhost:3000/{{this.productImage}}" alt="">
-			<span>Наименование: {{this.name}}</span>
+			<span>Наименование: <b>{{this.name}}</b></span>
 			<span>Price: {{this.price}}</span>
-			<a href="#" data-id="{{this._id}}" class="change btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
-			<a href="#" data-id="{{this._id}}" class="delete">Удалить</a>
-			<div class="formGroup">
-				<a href="#" data-id="{{this._id}}" class="orderProduct">Заказать</a>
+			<a href="#" data-id="{{this._id}}" class="change btn btn-info btn-lg" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
+			<a href="#" data-id="{{this._id}}" class="delete btn btn-danger btn-lg">Удалить</a>
+			<div class="form-group">
+				<a href="#" data-id="{{this._id}}" class="orderProduct btn btn-success btn-lg">Заказать</a>
 				№ <input type="number" class="quanityInput">
 			</div>
 		</div>
@@ -138,20 +88,73 @@
 </script>
 
 
+<script id="newProduct" type="text/x-handlebars-template">
+
+ 	<form action="#" class={{formClass}} id={{formId}}>
+	    <h3>{{headText}}</h3>
+	    {{#each newProductData}}
+     	    <div class="form-group">
+        		<label for={{this.for}}>{{this.text}}</label>
+          		<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+        	</div>
+        {{/each}}
+
+        {{#each buttons}}
+        	<button type="{{this.type}}" class="{{this.class}}" id="{{this.id}}">{{this.text}}</button>
+        {{/each}}
+    </form>
+
+</script>
+
+
+<script id="editProduct" type="text/x-handlebars-template">
+
+	<form action="#" class="form-row" id="changeProduct">
+		<h2>ИЗМЕНЕНИЕ ПРОДУКТА</h2>
+		<label for="productName">Название</label>
+		<input class="editProductName form-control-lg" type="text" name="productName" placeholder="Введите название" value = {{name}}>
+		<label for="price">ЦЕНА</label>
+		<input class="editCount form-control-lg" type="number" name="price" placeholder="Укажите цену" value = {{price}}>
+		<label for="image">ВЫБРАТЬ ФОТО</label>
+		<input type="file"
+		class="form-control-lg" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
+		<button class="saveChanges btn-success btn-lg" data-id="{{_id}}">СОХРАНИТЬ</button>
+	</form>
+
+</script>
+
 
 <script id="ordersTemplate" type="text/x-handlebars-template">
 
-	{{#each response}}
-		<div class="ordersBlock">
-			<span>Наименование: {{this.product.name}}</span>
-			<span>Price: {{this.product.price}}</span>
-			<span>Количетсво: {{this.quantity}}</span>
-			<span>Общая цена: {{this.totalprice}}</span>
-			<a href="#" data-id="{{this._id}}" class="deleteOrder">Удалить</a>
-		</div>
-	{{/each}}
-	<span>Сумма заказа: {{result.price}}</span>
-	<span>Количество товаров: {{result.count}}</span>
+	<table class="table">
+		
+		<thead class="thead-inverse">
+			<tr>
+				<th>Наименование</th>
+				<th>Цена</th>
+				<th>Количетсво</th>
+				<th>Общая цена</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		{{#each response}}
+		<tbody>
+			<td>{{this.product.name}}</td>
+			<td>{{this.product.price}}</td>
+			<td>{{this.quantity}}</td>
+			<td>{{this.totalprice}}</td>
+			<td><a href="#" data-id="{{this._id}}" class="deleteOrder btn">Удалить</a></td>
+		{{/each}}
+		</tbody>
+
+		<td></td>
+		<td></td>
+		<td>{{result.count}}</td>
+		<td>{{result.price}}</td>
+		<td></td>
+
+	</table>
 
 </script>
 
@@ -171,3 +174,17 @@
 
 
 
+
+
+
+	{{#each response}}
+		<div class="ordersBlock">
+			<span>Наименование: {{this.product.name}}</span>
+			<span>Price: {{this.product.price}}</span>
+			<span>Количетсво: {{this.quantity}}</span>
+			<span>Общая цена: {{this.totalprice}}</span>
+			<a href="#" data-id="{{this._id}}" class="deleteOrder">Удалить</a>
+		</div>
+	{{/each}}
+	<span>Сумма заказа: {{result.price}}</span>
+	<span>Количество товаров: {{result.count}}</span>
