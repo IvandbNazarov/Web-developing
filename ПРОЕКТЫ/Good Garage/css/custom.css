@@ -30,7 +30,20 @@ body {
 	color: yellow;
 }
 
+.contact {
+	text-align: center;
+	list-style-type: none;
+}
 
+.social {
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.contact li h2 {
+	cursor: pointer;
+	margin-top:60px;
+}
 
 
 

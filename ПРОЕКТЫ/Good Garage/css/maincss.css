@@ -28,6 +28,25 @@ body {
 	margin-top:25px;
 }
 
+.contact {
+	text-align: center;
+	list-style-type: none;
+}
+
+.social {
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.contact li h2 {
+	cursor: pointer;
+	margin-top:60px;
+}
+
+
+
+
+
 .registration {
 	text-align: center;
 	margin-top: 50px;
@@ -79,16 +98,11 @@ body {
 	background-color: #3E3E3E;
 }
 
-.contact {
-	text-align: center;
-	list-style-type: none;
+#map {
+	border: 2px solid white;
 }
 
-.social {
-	list-style-type: none;
-	cursor: pointer;
-}
-
-.contact li h2 {
-	cursor: pointer;
+img {
+	background-color: #E62626;
+	border: 1px solid black;
 }
