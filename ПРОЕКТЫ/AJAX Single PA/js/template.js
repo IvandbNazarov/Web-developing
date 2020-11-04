@@ -17,7 +17,7 @@ var autorizationMenuData = {
 
 
 var registrationBlockData = {
-	formClass: "form-row",
+	formClass: "form-row was-validated",
 	formId : "inputform",
 	headText : "",
 	registrationData : [
@@ -25,17 +25,21 @@ var registrationBlockData = {
 			for : "email",
 			text : 	"EMAIL",
 			type : "text",
-			class : "form-control-lg",
+			class : "form-control-lg form-control",
 			id : "email",
-			placeholder : "Введите EMAIL"
+			placeholder : "Введите EMAIL",
+			errorMessage : "Введите правильный EMAIL",
+			modalAlert : "emailAlert" 
 		},
 		{
 			for : "password",
 			text : "ПАРОЛЬ",
 			type : "password",
-			class : "form-control-lg",
+			class : "form-control-lg form-control",
 			id : "password",
-			placeholder : "Введите ПАРОЛЬ"	
+			placeholder : "Введите ПАРОЛЬ",	
+			errorMessage :  "Введите правильный ПАРОЛЬ",
+			modalAlert : "passwordAlert"
 		}	
 	],
 		buttons : [ 
@@ -79,7 +83,7 @@ var createProductBlockData = {
 		{
 			for : "createImg",
 			text : 	"Изображение",
-			type : "mumber",
+			type : "file",
 			class : "form-control-lg",
 			id : "createImg",
 			placeholder : "Загрузите фотографию"

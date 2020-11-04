@@ -56,8 +56,15 @@
       <h3>{{headText}}</h3>
       {{#each registrationData}}
         <div class="form-group">
-          <label for={{this.for}}>{{this.text}}</label>
-          <input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+
+        	<div class="alert alert-danger" id ="{{this.modalAlert}}" role="alert">Это уведомление об опасности — check it out!
+			</div>
+
+       		<label for={{this.for}}>{{this.text}}</label>
+        	<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+        	<div class="invalid-feedback">
+     		{{this.errorMessage}}
+    	</div>
         </div>
       {{/each}}
 
@@ -176,15 +183,3 @@
 
 
 
-
-	{{#each response}}
-		<div class="ordersBlock">
-			<span>Наименование: {{this.product.name}}</span>
-			<span>Price: {{this.product.price}}</span>
-			<span>Количетсво: {{this.quantity}}</span>
-			<span>Общая цена: {{this.totalprice}}</span>
-			<a href="#" data-id="{{this._id}}" class="deleteOrder">Удалить</a>
-		</div>
-	{{/each}}
-	<span>Сумма заказа: {{result.price}}</span>
-	<span>Количество товаров: {{result.count}}</span>

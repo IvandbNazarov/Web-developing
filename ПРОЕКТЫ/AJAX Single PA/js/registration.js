@@ -60,7 +60,28 @@ $("#registr").on("click", function(){
 	} 
 });
 
+
+$("#passwordAlert").hide();
+$("#emailAlert").hide();
+
 							/*ЗАПРОСЫ*/
+
+function loginRegistration (callback) {
+	let emailIsValid = validate("email", $("#email").val());
+	let passwordIsValid = validate("password", $("#password").val());
+	if(emailIsValid && passwordIsValid) {
+ 		callback();
+	}
+	else {
+	 	emailIsValid ? $("#email").removeClass("is-invalid") : 
+		$("#email").addClass("is-invalid");
+		passwordIsValid ? $("#password").removeClass("is-invalid") :
+		$("#password").addClass("is-invalid");
+	}
+}
+
+
+
 
 function request(props, options) {
   $.ajax({
@@ -80,23 +101,29 @@ function request(props, options) {
 
 $('body').on("click", "#newbtn", function(e){
 	e.preventDefault();
-	registration();
+	loginRegistration(registration);
 });
+
+
+/*$('body').on("click", "#newbtn", function(e){
+	e.preventDefault();
+	registration();
+});*/
 
 function registration() {
 	request({
 		method:'POST',
 		url:"user/signup",
 		data:{
-			email: $("#newemail").val(),
-			password: $("#newpassword").val(),
+			email: $("#email").val(),
+			password: $("#password").val(),
 		},
 		callback:  function(response){
 			alert("Вы успешно зарегистрированы!")}
 	},{
 		data:{
-			email: $("#newemail").val(),
-			password: $("#newpassword").val(),
+			email: $("#email").val(),
+			password: $("#password").val(),
 		},
 		error: function(error){console.log(error)}
 	})
@@ -106,10 +133,17 @@ function registration() {
 
 
 
-$("body").on("click",'#oldbtn', function(e){
+
+$('body').on("click", "#oldbtn", function(e){
+	e.preventDefault();
+	loginRegistration(logIn);
+});
+
+
+/*$("body").on("click",'#oldbtn', function(e){
 	e.preventDefault();
 	logIn();
-	});
+	});*/
 
 function logIn() {
 	request({
@@ -124,7 +158,7 @@ function logIn() {
 			email: $("#email").val(),
 			password: $("#password").val(),
 		},
-		error: function(error){alert("WTF")}
+		error: function(error){alert("wtf")}
 	})
 }
 
@@ -384,3 +418,41 @@ $("body").on("click", ".exit", function(){
     location.reload();
 })
 
+
+
+									/*ВАЛИДАЦИЯ*/
+
+var rules = {
+    email: {
+      required: true,
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      minLength: 3
+    },
+    password: {
+      required: true,
+      minLength: 4,
+      maxLength: 10
+    },
+    productName: {
+    	required: true
+    },   		
+    productPrice: {
+    	required: true
+    }
+}
+
+
+function validate ( ruleName, val ) { 
+let rule = rules[ruleName];
+let isValid = true;
+let formattedValue = val ? val.trim() : "";
+if(rule.required && formattedValue.length === 0 ){
+	isValid =  false};
+if(rule.email && !rule.email.test(formattedValue)) {
+	isValid = false};
+if(rule.minLength && formattedValue.length < rule.minLength ){ 
+	isValid =  false};
+if(rule.maxLength && formattedValue.length > rule.maxLength ){ 
+	isValid =  false};
+return isValid;
+}
