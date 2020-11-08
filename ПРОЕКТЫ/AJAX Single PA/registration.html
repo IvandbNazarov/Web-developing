@@ -54,7 +54,7 @@
 
 <script id="inputForm" type="text/x-handlebars-template">
 
-    <form action="#" class={{formClass}} id={{formId}}>
+    <form class={{formClass}} id={{formId}}>
     	<h3>{{headText}}</h3>
     	{{#each alert}}
         <div class="alert alert-danger"
@@ -102,7 +102,7 @@
 
 <script id="newProduct" type="text/x-handlebars-template">
 
- 	<form action="#" class={{formClass}} id={{formId}}>
+ 	<form class={{formClass}} id={{formId}}>
 	    <h3>{{headText}}</h3>
 	    {{#each newProductData}}
      	    <div class="form-group">
@@ -121,7 +121,7 @@
 
 <script id="editProduct" type="text/x-handlebars-template">
 
-	<form action="#" class="form-row" id="changeProduct">
+	<form class="form-row" id="changeProduct">
 		<h2>ИЗМЕНЕНИЕ ПРОДУКТА</h2>
 		<label for="productName">Название</label>
 		<input class="editProductName form-control-lg" type="text" name="productName" placeholder="Введите название" value = {{name}}>
@@ -130,7 +130,7 @@
 		<label for="image">ВЫБРАТЬ ФОТО</label>
 		<input type="file"
 		class="form-control-lg" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
-		<button class="saveChanges btn-success btn-lg fancybox" data-id="{{_id}}">СОХРАНИТЬ</button>
+		<button class="saveChanges btn-success btn-lg" data-id="{{_id}}">СОХРАНИТЬ</button>
 	</form>
 
 </script>

@@ -152,15 +152,15 @@ function logIn() {
 
 
 
-$("body").on("click", ".create", function(event){
+$("body").on("click", "#create", function(event){
 	addProduct();
 })
 
 function addProduct(){
 	var formData = new FormData();
-	    formData.append("productimage", $("#productImage").prop("files")[0]);
-	    formData.append("name", $(".productName").val());
-	    formData.append("price", $(".count").val());
+	    formData.append("productimage", $("#createImg").prop("files")[0]);
+	    formData.append("name", $("#createName").val());
+	    formData.append("price", $("#createprice").val());
 	request({
 		method: 'POST',
 		url: "products",
@@ -192,7 +192,6 @@ function getProducts(){
 
 $("body").on("click", ".saveChanges", function (event){
 	changeProduct(event.target.dataset.id)
-		$.fancybox.close();
 });
 
 function changeProduct (id){
@@ -203,7 +202,10 @@ function changeProduct (id){
   	request({
   		method:'PATCH',
     	url:"products/"+ id,
-    	callback: getProducts
+    	callback: function(){
+    		$.fancybox.close();
+    		getProducts();
+    	}
   	},{
   		processData: false,
 	    contentType: false,
@@ -218,7 +220,7 @@ function changeProduct (id){
 
 
 
-$("body").on("click", ".productBlock .change", function(event){
+$("body").on("click", ".change", function(event){
 	getProductData(event.target);	
 })
 
@@ -247,11 +249,6 @@ function getProductData(elem){
 
 
 
-
-
-$("body").on("click", ".productBlock .delete", function(event){
-	getProductData(event.target);	
-})
 
 $("body").on("click", ".delete", function(event){
 	deleteProduct(event.target.dataset.id)

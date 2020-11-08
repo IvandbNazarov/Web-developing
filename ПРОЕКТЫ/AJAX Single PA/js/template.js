@@ -80,7 +80,7 @@ var createProductBlockData = {
 			text : 	"Наименование",
 			type : "text",
 			class : "form-control-lg",
-			id : "createname",
+			id : "createName",
 			placeholder : "Введите название"
 		},
 		{
