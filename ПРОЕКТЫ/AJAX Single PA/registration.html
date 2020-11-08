@@ -50,23 +50,28 @@
 </script>
 
 
+
+
 <script id="inputForm" type="text/x-handlebars-template">
 
     <form action="#" class={{formClass}} id={{formId}}>
-      <h3>{{headText}}</h3>
-      {{#each registrationData}}
-        <div class="form-group">
+    	<h3>{{headText}}</h3>
+    	{{#each alert}}
+        <div class="alert alert-danger"
+        id ="{{id}}" role="alert">
+		{{text}}
+		</div>
+		{{/each}}
 
-        	<div class="alert alert-danger" id ="{{this.modalAlert}}" role="alert">Это уведомление об опасности — check it out!
-			</div>
-
-       		<label for={{this.for}}>{{this.text}}</label>
-        	<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
-        	<div class="invalid-feedback">
-     		{{this.errorMessage}}
-    	</div>
-        </div>
-      {{/each}}
+		{{#each registrationData}}
+        	<div class="form-group">
+       			<label for={{this.for}}>{{this.text}}</label>
+        		<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+        		<div class="invalid-feedback">
+     			{{this.errorMessage}}
+    			</div>
+        	</div>
+        {{/each}}
 
       {{#each buttons}}
         <button type="{{this.type}}" class="{{this.class}}" id="{{this.id}}">{{this.text}}</button>
@@ -125,7 +130,7 @@
 		<label for="image">ВЫБРАТЬ ФОТО</label>
 		<input type="file"
 		class="form-control-lg" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
-		<button class="saveChanges btn-success btn-lg" data-id="{{_id}}">СОХРАНИТЬ</button>
+		<button class="saveChanges btn-success btn-lg fancybox" data-id="{{_id}}">СОХРАНИТЬ</button>
 	</form>
 
 </script>

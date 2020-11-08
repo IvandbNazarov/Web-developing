@@ -17,6 +17,8 @@ var autorizationMenuData = {
 
 
 var registrationBlockData = {
+	idAlert : "registrationAlert",
+	textAlert : "Такой пользователь уже существует",
 	formClass: "form-row was-validated",
 	formId : "inputform",
 	headText : "",
@@ -55,7 +57,16 @@ var registrationBlockData = {
 			id : "newbtn",
 			text : "СОЗДАТЬ АККАУНТ"
 		}
-	]
+	],
+		alert : [
+		{
+			id : "registrationAlert",
+			text : "Такой пользователь уже существует",
+		},
+		{
+			id : "autorizationAlert",
+			text : "Неверный Email или Пароль",
+		}]
 }
 
 

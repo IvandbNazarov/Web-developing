@@ -26,6 +26,7 @@ var oneProduct = $("#product");
 var editProductBlock = $("#editProduct");
 var ordersTemplateBlock = $("#ordersTemplate");
 var titleBlock = $("#headerTemplate");
+var alertBlock = $("#alertPopup");
 
 var token;
 
@@ -61,26 +62,10 @@ $("#registr").on("click", function(){
 });
 
 
-$("#passwordAlert").hide();
-$("#emailAlert").hide();
+$("#registrationAlert").hide();
+$("#autorizationAlert").hide();
 
 							/*ЗАПРОСЫ*/
-
-function loginRegistration (callback) {
-	let emailIsValid = validate("email", $("#email").val());
-	let passwordIsValid = validate("password", $("#password").val());
-	if(emailIsValid && passwordIsValid) {
- 		callback();
-	}
-	else {
-	 	emailIsValid ? $("#email").removeClass("is-invalid") : 
-		$("#email").addClass("is-invalid");
-		passwordIsValid ? $("#password").removeClass("is-invalid") :
-		$("#password").addClass("is-invalid");
-	}
-}
-
-
 
 
 function request(props, options) {
@@ -125,11 +110,11 @@ function registration() {
 			email: $("#email").val(),
 			password: $("#password").val(),
 		},
-		error: function(error){console.log(error)}
+		error: function(error){
+			alertPoppup($("#registrationAlert"));
+		}
 	})
 }
-
-
 
 
 
@@ -158,7 +143,7 @@ function logIn() {
 			email: $("#email").val(),
 			password: $("#password").val(),
 		},
-		error: function(error){alert("wtf")}
+		error: function(error){}
 	})
 }
 
@@ -205,11 +190,10 @@ function getProducts(){
 
 
 
-
 $("body").on("click", ".saveChanges", function (event){
-	changeProduct(event.target.dataset.id);
+	changeProduct(event.target.dataset.id)
 		$.fancybox.close();
-	});
+});
 
 function changeProduct (id){
 	var formData = new FormData();
@@ -242,7 +226,7 @@ function getProduct(id){
 	request({
 		method:'GET',
 	    url:"products/" + id,
-	    callback:  function(response){
+	    callback: function(response){
 	  	 	constructor(response.product, editProductBlock, $("#modal"));
 	  	  	$.fancybox.open({
         		src:"#modal",
@@ -349,7 +333,9 @@ function deleteOrder(id, callback){
 
 
 $("body").on("click", ".orderProduct", function(event){
+	if (validate("quanity", $(".quanityInput").val()))
 	addOrder(event.target);
+	else return;
 })
 
 function addOrder(element){
@@ -433,26 +419,64 @@ var rules = {
       minLength: 4,
       maxLength: 10
     },
-    productName: {
+    changeProductName: {
+    	regName : /^[A-Z a-z]{2,}$/,
     	required: true
     },   		
-    productPrice: {
-    	required: true
+    changeProductPrice: {
+    	required : true,
+    	regPrice : /^[0-9]{1,}\.{0,1}[0-9]{0,2}$/
+    },
+    quanity: {
+    	reg : /^[1-9][0-9]{0,}$/
     }
 }
 
 
 function validate ( ruleName, val ) { 
-let rule = rules[ruleName];
-let isValid = true;
-let formattedValue = val ? val.trim() : "";
-if(rule.required && formattedValue.length === 0 ){
-	isValid =  false};
-if(rule.email && !rule.email.test(formattedValue)) {
-	isValid = false};
-if(rule.minLength && formattedValue.length < rule.minLength ){ 
-	isValid =  false};
-if(rule.maxLength && formattedValue.length > rule.maxLength ){ 
-	isValid =  false};
-return isValid;
+	let rule = rules[ruleName];
+	let isValid = true;
+	let formattedValue = val ? val.trim() : "";
+	if(rule.required && formattedValue.length === 0 ){
+		isValid =  false};
+	if(rule.email && !rule.email.test(formattedValue)) {
+		isValid = false};
+	if(rule.minLength && formattedValue.length < rule.minLength ){ 
+		isValid =  false};
+	if(rule.maxLength && formattedValue.length > rule.maxLength ){ 
+		isValid =  false};
+	if(rule.reg && !rule.reg.test(formattedValue)){
+		isValid = false}
+	if(rule.regPrice && !rule.regPrice.test(formattedValue)){
+		isValid = false}
+	if(rule.regName && !rule.regName.test(formattedValue)){
+		isValid = false}
+	return isValid;
 }
+
+
+
+
+function loginRegistration (callback) {
+	let emailIsValid = validate("email", $("#email").val());
+	let passwordIsValid = validate("password", $("#password").val());
+	if(emailIsValid && passwordIsValid) {
+ 		callback();
+	}
+	else {
+	 	emailIsValid ? $("#email").removeClass("is-invalid") : 
+		$("#email").addClass("is-invalid");
+		passwordIsValid ? $("#password").removeClass("is-invalid") :
+		$("#password").addClass("is-invalid");
+		alertPoppup($("#autorizationAlert"));
+	}
+}
+
+
+
+
+function alertPoppup (element) {
+	$(element).show('slow');
+	setTimeout(function() { $(element).hide('slow'); }, 2000);
+}
+
