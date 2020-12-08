@@ -67,8 +67,7 @@
         	<div class="form-group">
        			<label for={{this.for}}>{{this.text}}</label>
         		<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
-        		<div class="invalid-feedback">
-     			{{this.errorMessage}}
+        		<div class="invalid-feedback">{{this.errorMessage}}
     			</div>
         	</div>
         {{/each}}
@@ -87,12 +86,14 @@
 		<div class="productBlock">
 			<img src="http://localhost:3000/{{this.productImage}}" alt="">
 			<span>Наименование: <b>{{this.name}}</b></span>
-			<span>Price: {{this.price}}</span>
+			<span>Цена: {{this.price}}</span>
 			<a href="#" data-id="{{this._id}}" class="change btn btn-info btn-lg" data-toggle="modal" data-target="#basicExampleModal">Изменить</a>
 			<a href="#" data-id="{{this._id}}" class="delete btn btn-danger btn-lg">Удалить</a>
 			<div class="form-group">
 				<a href="#" data-id="{{this._id}}" class="orderProduct btn btn-success btn-lg">Заказать</a>
 				№ <input type="number" class="quanityInput">
+				<div class="invalid-feedback">Должно быть целое число, больше 0
+    			</div>
 			</div>
 		</div>
 	{{/each}}
@@ -108,6 +109,8 @@
      	    <div class="form-group">
         		<label for={{this.for}}>{{this.text}}</label>
           		<input type="{{this.type}}" class="{{this.class}}" id="{{this.id}}" placeholder="{{this.placeholder}}">
+          		<div class="invalid-feedback">{{this.errorMessage}}
+    			</div>
         	</div>
         {{/each}}
 
@@ -130,7 +133,7 @@
 		<label for="image">ВЫБРАТЬ ФОТО</label>
 		<input type="file"
 		class="form-control-lg" name="image" id="productImage" placeholder="Загрузите	фотографию" value = {{productImage}}>	
-		<button class="saveChanges btn-success btn-lg" data-id="{{_id}}">СОХРАНИТЬ</button>
+		<button type="button" class="saveChanges btn-success btn-lg" data-id="{{_id}}">СОХРАНИТЬ</button>
 	</form>
 
 </script>

@@ -64,6 +64,7 @@ $("#registr").on("click", function(){
 
 $("#registrationAlert").hide();
 $("#autorizationAlert").hide();
+$("#orderBtn").hide();
 
 							/*ЗАПРОСЫ*/
 
@@ -89,11 +90,6 @@ $('body').on("click", "#newbtn", function(e){
 	loginRegistration(registration);
 });
 
-
-/*$('body').on("click", "#newbtn", function(e){
-	e.preventDefault();
-	registration();
-});*/
 
 function registration() {
 	request({
@@ -125,11 +121,6 @@ $('body').on("click", "#oldbtn", function(e){
 });
 
 
-/*$("body").on("click",'#oldbtn', function(e){
-	e.preventDefault();
-	logIn();
-	});*/
-
 function logIn() {
 	request({
 		method:'POST',
@@ -143,7 +134,8 @@ function logIn() {
 			email: $("#email").val(),
 			password: $("#password").val(),
 		},
-		error: function(error){}
+		error: function(error){
+		}
 	})
 }
 
@@ -153,7 +145,7 @@ function logIn() {
 
 
 $("body").on("click", "#create", function(event){
-	addProduct();
+	productValid(addProduct);
 })
 
 function addProduct(){
@@ -330,9 +322,13 @@ function deleteOrder(id, callback){
 
 
 $("body").on("click", ".orderProduct", function(event){
-	if (validate("quanity", $(".quanityInput").val()))
-	addOrder(event.target);
-	else return;
+	let orderIsValid =  validate("quanity", $(".quanityInput").val());
+	if (orderIsValid) {
+		addOrder(event.target);
+	} else {
+		orderIsValid ? $(".quanityInput").removeClass("is-invalid") : 
+		$(".quanityInput").addClass("is-invalid");
+	}
 })
 
 function addOrder(element){
@@ -407,25 +403,24 @@ $("body").on("click", ".exit", function(){
 
 var rules = {
     email: {
-      required: true,
-      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      minLength: 3
+      	required: true,
+      	email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      	minLength: 3
     },
     password: {
-      required: true,
-      minLength: 4,
-      maxLength: 10
+    	password: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})/,
+      	required: true,
     },
     changeProductName: {
-    	regName : /^[A-Z a-z]{2,}$/,
+    	regName : /^[А-Я а-я]{2,}$/,
     	required: true
     },   		
     changeProductPrice: {
     	required : true,
-    	regPrice : /^[0-9]{1,}\.{0,1}[0-9]{0,2}$/
+    	regPrice : /(^0*[1-9]+\d*$)|(^\d+[,\.]\d{1,2}$)/
     },
     quanity: {
-    	reg : /^[1-9][0-9]{0,}$/
+    	reg : /^0*[1-9]+\d*$/
     }
 }
 
@@ -442,12 +437,14 @@ function validate ( ruleName, val ) {
 		isValid =  false};
 	if(rule.maxLength && formattedValue.length > rule.maxLength ){ 
 		isValid =  false};
+	if(rule.password && !rule.password.test(formattedValue)) {
+		isValid = false};	
 	if(rule.reg && !rule.reg.test(formattedValue)){
-		isValid = false}
+		isValid = false};
 	if(rule.regPrice && !rule.regPrice.test(formattedValue)){
-		isValid = false}
+		isValid = false};
 	if(rule.regName && !rule.regName.test(formattedValue)){
-		isValid = false}
+		isValid = false};
 	return isValid;
 }
 
@@ -459,21 +456,32 @@ function loginRegistration (callback) {
 	let passwordIsValid = validate("password", $("#password").val());
 	if(emailIsValid && passwordIsValid) {
  		callback();
-	}
-	else {
+	} else {
 	 	emailIsValid ? $("#email").removeClass("is-invalid") : 
 		$("#email").addClass("is-invalid");
 		passwordIsValid ? $("#password").removeClass("is-invalid") :
 		$("#password").addClass("is-invalid");
-		alertPoppup($("#autorizationAlert"));
+		alertPoppup($("#autorizationAlert"))
+	}
+}
+
+function productValid (callback) {
+	let nameIsValid = validate("changeProductName", $("#createName").val());
+	let priceIsValid = validate("changeProductPrice", $("#createprice").val());
+	if(nameIsValid && priceIsValid) {
+		callback();
+	} else {
+		nameIsValid ? $("#createName").removeClass("is-invalid") : 
+		$("#createName").addClass("is-invalid");
+		priceIsValid ? $("#createprice").removeClass("is-invalid") :
+		$("#createprice").addClass("is-invalid");
 	}
 }
 
 
 
-
 function alertPoppup (element) {
 	$(element).show('slow');
-	setTimeout(function() { $(element).hide('slow'); }, 2000);
+	setTimeout(function() { $(element).hide('slow'); }, 6000);
 }
 

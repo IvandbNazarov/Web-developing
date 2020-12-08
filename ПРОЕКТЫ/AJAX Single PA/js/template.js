@@ -40,7 +40,7 @@ var registrationBlockData = {
 			class : "form-control-lg form-control",
 			id : "password",
 			placeholder : "Введите ПАРОЛЬ",	
-			errorMessage :  "Введите правильный ПАРОЛЬ",
+			errorMessage :  "Пароль должен состоять как минимум из 1 заглавной, 1 строчной букв и 1 цифры",
 			modalAlert : "passwordAlert"
 		}	
 	],
@@ -81,7 +81,8 @@ var createProductBlockData = {
 			type : "text",
 			class : "form-control-lg",
 			id : "createName",
-			placeholder : "Введите название"
+			placeholder : "Введите название",
+			errorMessage : "Название должно состоять только из букв,минимум 2-х",
 		},
 		{
 			for : "createprice",
@@ -89,7 +90,8 @@ var createProductBlockData = {
 			type : "mumber",
 			class : "form-control-lg",
 			id : "createprice",
-			placeholder : "Укажите цену"
+			placeholder : "Укажите цену",
+			errorMessage : "Цена должна отличаться от 0,максимум два знака после запятой",
 		},
 		{
 			for : "createImg",
